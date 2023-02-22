@@ -9,7 +9,7 @@ import 'nprogress/nprogress.css' // 引入进度条样式
 const whiteList = ['/login', '/404'] // 定义白名单
 // 前置守卫
 // next() 放过 next(false) 跳转终止 next(地址) 跳转到某个地址
-router.beforeEach((to, from, next) => {
+router.beforeEach(async(to, from, next) => {
   nProgress.start() // 开启进度条
   if (store.getters.token) {
     // 如果有token
@@ -17,6 +17,10 @@ router.beforeEach((to, from, next) => {
       // 如果要访问的是登录页
       next('/') // 跳到主页
     } else {
+      // 如果当前vuex中有用户资料的id 就不需要再获取了 没有再获取
+      if (!store.getters.userId) {
+        await store.dispatch('user/getUserInfo')
+      }
       next()
     }
   } else {

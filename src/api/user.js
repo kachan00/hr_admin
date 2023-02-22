@@ -10,10 +10,17 @@ export function login(data) {
 }
 
 // 获取用户资料接口
-export function getUsesrInfo(token) {
+export function getUserInfo(token) {
   return request({
     url: '/sys/profile',
     method: 'post'
+  })
+}
+
+// 获取用户资料详情（头像）接口
+export function getUserDetailById(id) {
+  return request({
+    url: `/sys/user/${id}`
   })
 }
 

@@ -1,5 +1,5 @@
 import { getToken, setToken, removeToken } from '@/utils/auth'
-import { login, getUsesrInfo } from '@/api/user'
+import { login, getUserInfo, getUserDetailById } from '@/api/user'
 // 初始化的时候从缓存中读取状态 并赋值到初始化的状态上
 const state = {
   token: getToken(),
@@ -33,9 +33,12 @@ const actions = {
     const result = await login(data) // 拿到token
     context.commit('setToken', result) // 设置token
   },
-  async getUsesrInfo(context) {
-    const result = await getUsesrInfo()
-    context.commit('setUserInfo', result) // 提交到mutations
+  async getUserInfo(context) {
+    const result = await getUserInfo()
+    // 获取用户详情(头像)
+    const beseInfo = await getUserDetailById(result.userId)
+    // 合并用户所有信息 并提交到mutations
+    context.commit('setUserInfo', { ...result, ...beseInfo }) // 提交到mutations
     return result
   }
 }
