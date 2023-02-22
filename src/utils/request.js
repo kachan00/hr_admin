@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { Message } from 'element-ui'
+import store from '@/store'
 // create an axios instance
 const service = axios.create({
   // 当执行 npm run dev => .env.development => /api
@@ -7,8 +8,17 @@ const service = axios.create({
   timeout: 5000
 })
 
-// request interceptor
-service.interceptors.request.use(
+// 请求拦截器
+service.interceptors.request.use(config => {
+  // config 是请求的配置信息
+  // 注入token
+  if (store.getters.token) {
+    config.headers['Authorization'] = `Bearer ${store.getters.token}`
+  }
+  return config
+}, error => {
+  return Promise.reject(error)
+}
 
 )
 
