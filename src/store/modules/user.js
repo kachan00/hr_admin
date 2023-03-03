@@ -40,6 +40,13 @@ const actions = {
     // 合并用户所有信息 并提交到mutations
     context.commit('setUserInfo', { ...result, ...beseInfo }) // 提交到mutations
     return result
+  },
+  // 登出操作
+  logout(context) {
+    // 删除token
+    context.commit('removeTokens')
+    // 删除用户资料
+    context.commit('removeUseInfo')
   }
 }
 export default {
