@@ -1,4 +1,4 @@
-import { getToken, setToken, removeToken } from '@/utils/auth'
+import { getToken, setToken, removeToken, setTimeStamp } from '@/utils/auth'
 import { login, getUserInfo, getUserDetailById } from '@/api/user'
 // 初始化的时候从缓存中读取状态 并赋值到初始化的状态上
 const state = {
@@ -32,6 +32,8 @@ const actions = {
     // 调用api接口
     const result = await login(data) // 拿到token
     context.commit('setToken', result) // 设置token
+    // 登录成功设置时间戳
+    setTimeStamp()
   },
   async getUserInfo(context) {
     const result = await getUserInfo()
