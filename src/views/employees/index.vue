@@ -6,7 +6,7 @@
         <template slot="after">
           <el-button type="warning" size="small" @click="$router.push('/import')">导入</el-button>
           <el-button size="small" type="danger" @click="exportData">导出</el-button>
-          <el-button icon="plus" type="primary" size="small" @click="showDialog = true">新增员工</el-button>
+          <el-button :disabled="!checkPermission('adds')" icon="plus" type="primary" size="small" @click="showDialog = true">新增员工</el-button>
         </template>
       </page-tools>
       <!-- 放置表格和分页 -->

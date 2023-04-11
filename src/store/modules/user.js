@@ -1,5 +1,6 @@
 import { getToken, setToken, removeToken, setTimeStamp } from '@/utils/auth'
 import { login, getUserInfo, getUserDetailById } from '@/api/user'
+import { resetRouter } from '@/router'
 // 初始化的时候从缓存中读取状态 并赋值到初始化的状态上
 const state = {
   token: getToken(),
@@ -49,6 +50,13 @@ const actions = {
     context.commit('removeTokens')
     // 删除用户资料
     context.commit('removeUseInfo')
+    // 重置路由
+    resetRouter()
+    // 还有一步  vuex中的数据是不是还在
+    // 要清空permission模块下的state数据
+    // 父模块 调用 子模块的action
+    context.commit('permission/setRoutes', [], { root: true })
+    // 子模块调用子模块的action 可以 将 commit的第三个参数 设置成  { root: true } 就表示当前的context不是子模块了 而是父模块
   }
 }
 export default {
