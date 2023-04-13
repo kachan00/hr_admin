@@ -6,7 +6,7 @@
         <template slot="after">
           <el-button type="warning" size="small" @click="$router.push('/import')">导入</el-button>
           <el-button size="small" type="danger" @click="exportData">导出</el-button>
-          <el-button :disabled="!checkPermission('adds')" icon="plus" type="primary" size="small" @click="showDialog = true">新增员工</el-button>
+          <el-button :disabled="!checkPermission('add_user')" icon="plus" type="primary" size="small" @click="showDialog = true">新增员工</el-button>
         </template>
       </page-tools>
       <!-- 放置表格和分页 -->
@@ -31,9 +31,9 @@
           <el-table-column label="操作" sortable="" fixed="right" width="280">
             <template slot-scope="{ row }">
               <el-button type="text" size="small" @click="$router.push(`/employees/detail/${row.id}`)">查看</el-button>
-              <el-button type="text" size="small">转正</el-button>
+              <!-- <el-button type="text" size="small">转正</el-button>
               <el-button type="text" size="small">调岗</el-button>
-              <el-button type="text" size="small">离职</el-button>
+              <el-button type="text" size="small">离职</el-button> -->
               <el-button type="text" size="small" @click="editRole(row.id)">角色</el-button>
               <el-button type="text" size="small" @click="deleteEmployee(row.id)">删除</el-button>
             </template>

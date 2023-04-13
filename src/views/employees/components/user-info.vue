@@ -55,12 +55,7 @@
       </el-row>
       <!-- 员工照片 -->
       <el-row class="inline-info">
-        <el-col :span="12">
-          <el-form-item label="员工头像">
-            <!-- 放置上传图片 -->
-
-          </el-form-item>
-        </el-col>
+        <el-col :span="12" />
       </el-row>
       <!-- 保存个人信息 -->
       <el-row class="inline-info" type="flex" justify="center">

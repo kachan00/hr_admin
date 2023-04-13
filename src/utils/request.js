@@ -38,12 +38,12 @@ service.interceptors.request.use(config => {
 service.interceptors.response.use(
   response => {
     // 解析data
-    const { success, message, data } = response.data
+    const { success, data } = response.data
     if (success) {
       return data
     } else {
-      Message.error(message)
-      return Promise.reject(new Error(message))
+      // Message.error(message)
+      // return Promise.reject(new Error(message))
     }
   }, error => {
     if (error.response && error.response.data && error.response.data.code === 10002) {
